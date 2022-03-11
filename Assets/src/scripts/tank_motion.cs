@@ -12,6 +12,13 @@ public static class changeProp
     public static GameObject rightTrack;
     public static GameObject leftTrack;
     public static GameObject center;
+    public static GameObject cam;
+    public static GameObject camChildren;
+    public static GameObject tank;
+    public static GameObject bullet;
+    public static GameObject shootPoint;
+    public static float camSensOY;
+    public static float camSensOX;
 }
 
 public class tank_motion : MonoBehaviour
@@ -32,22 +39,14 @@ public class tank_motion : MonoBehaviour
     public float stopCoef = 5.0f; // Коэффициент к ускорению при останове
     public float stopCoefRotation = 10.0f; // Коэффициент к ускорению при останове во время поворота
     public bool complexBackMoving; // Делает поведение танка особенным во время движения назад-влево и назад-вправо
-    //changeProp changeprop = new changeProp();
-    //
+
     void Start()
     {
-        tank = Instantiate(obj, new Vector3(0.0f, 0.0f, 0.0f), obj.transform.rotation) as GameObject;
-        changeProp.tower = tank.transform.GetChild(2).gameObject;
-        changeProp.body = tank.transform.GetChild(3).gameObject;
-        changeProp.rightTrack = tank.transform.GetChild(4).gameObject;
-        changeProp.leftTrack = tank.transform.GetChild(5).gameObject;
-        changeProp.center = tank.transform.GetChild(6).gameObject;
     }
 
     void FixedUpdate()
     {
         Move();
-        //Debug.Log(tank.GetChild(1));
     }
 
     // Update is called once per frame
@@ -215,7 +214,7 @@ public class tank_motion : MonoBehaviour
 
         Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
         Vector3 rotate = new Vector3(0.0f, moveRotation, 0.0f);
-        tank.transform.Translate(movement * speed * Time.fixedDeltaTime);
-        tank.transform.Rotate(rotate * rotationSpeed * Time.fixedDeltaTime);
+        changeProp.tank.transform.Translate(movement * speed * Time.fixedDeltaTime);
+        changeProp.tank.transform.Rotate(rotate * rotationSpeed * Time.fixedDeltaTime);
     }
 }
